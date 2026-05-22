@@ -1,6 +1,11 @@
 # Agent Browser Guide
 
-A Claude Code skill that forces browser automation tasks to use the **Vercel Agent Browser CLI** instead of MCP tools or Playwright.
+[![skills.sh](https://skills.sh/b/heart-wcl/agent-browser-guide)](https://skills.sh/heart-wcl/agent-browser-guide)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A **Claude Code skill** that forces browser automation tasks to use the **Vercel Agent Browser CLI** instead of MCP tools or Playwright.
+
+**Keywords**: `claude-code`, `agent-skills`, `browser-automation`, `playwright-alternative`, `mcp-replacement`, `vercel`, `agent-browser`, `headless-browser`, `chrome-automation`, `cli-tools`, `web-scraping`, `screenshot`, `form-automation`
 
 ## Why
 
@@ -28,6 +33,36 @@ npx skills add heart-wcl/agent-browser-guide -g
 - npm
 
 The skill includes an auto-installer that downloads and sets up `agent-browser` CLI and Chrome for Testing automatically.
+
+## Agent Browser CLI vs Playwright MCP
+
+| Factor | Agent Browser CLI | Playwright MCP |
+|--------|-------------------|----------------|
+| Setup | Install → use immediately | Configure → restart Claude |
+| Token usage | Compact `@eN` refs (~7K for 10 steps) | Full DOM snapshots (~114K for 10 steps) |
+| Screenshot | Save to file, AI reads | Depends on MCP implementation |
+| Speed | Direct Rust CLI execution | JSON-RPC overhead |
+| Chrome download | ~150MB, auto-install | Requires separate Playwright install |
+
+## Supported Agents
+
+This skill works with any agent that supports the [Agent Skills specification](https://agentskills.io), including:
+
+- **Claude Code** (primary target)
+- **Codex**
+- **Cursor**
+- **OpenCode**
+- **Kiro CLI**
+- And [50+ more agents](https://github.com/vercel-labs/skills#supported-agents)
+
+## Use Cases
+
+- **Web scraping** — Extract data from websites programmatically
+- **UI testing** — Screenshot and verify frontend changes
+- **Form automation** — Fill forms, click buttons, navigate workflows
+- **Price monitoring** — Check e-commerce sites for price changes
+- **Content verification** — Verify web pages load correctly after deployments
+- **Research** — Search and summarize web content
 
 ## Usage
 

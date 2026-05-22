@@ -1,6 +1,11 @@
 # Agent Browser Guide
 
-一个 Claude Code skill，强制所有浏览器自动化任务使用 **Vercel Agent Browser CLI**，而非 MCP 工具或 Playwright。
+[![skills.sh](https://skills.sh/b/heart-wcl/agent-browser-guide)](https://skills.sh/heart-wcl/agent-browser-guide)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+一个 **Claude Code skill**，强制所有浏览器自动化任务使用 **Vercel Agent Browser CLI**，而非 MCP 工具或 Playwright。
+
+**关键词**：`claude-code`, `agent-skills`, `browser-automation`, `playwright-alternative`, `mcp-replacement`, `vercel`, `agent-browser`, `headless-browser`, `chrome-automation`, `cli-tools`, `web-scraping`, `screenshot`, `form-automation`
 
 ## 为什么
 
@@ -28,6 +33,36 @@ npx skills add heart-wcl/agent-browser-guide -g
 - npm
 
 本 skill 包含自动安装器，会自动下载并配置 `agent-browser` CLI 和 Chrome for Testing。
+
+## Agent Browser CLI vs Playwright MCP
+
+| 对比项 | Agent Browser CLI | Playwright MCP |
+|--------|-------------------|----------------|
+| 设置 | 安装后立即可用 | 需要配置 + 重启 Claude |
+| Token 消耗 | 紧凑 `@eN` 引用（10步约7K）| 完整 DOM 快照（10步约114K）|
+| 截图 | 保存到文件，AI 读取 | 依赖 MCP 实现 |
+| 速度 | 直接 Rust CLI 执行 | JSON-RPC 开销 |
+| Chrome 下载 | ~150MB，自动安装 | 需单独安装 Playwright |
+
+## 支持的 Agent
+
+本 skill 支持任何遵循 [Agent Skills 规范](https://agentskills.io) 的 agent，包括：
+
+- **Claude Code**（主要目标）
+- **Codex**
+- **Cursor**
+- **OpenCode**
+- **Kiro CLI**
+- 以及 [50+ 更多 agent](https://github.com/vercel-labs/skills#supported-agents)
+
+## 使用场景
+
+- **网页抓取** — 程序化提取网站数据
+- **UI 测试** — 截图并验证前端变更
+- **表单自动化** — 填写表单、点击按钮、导航工作流
+- **价格监控** — 检查电商网站价格变动
+- **内容验证** — 部署后验证网页是否正确加载
+- **研究** — 搜索并总结网页内容
 
 ## 使用
 
