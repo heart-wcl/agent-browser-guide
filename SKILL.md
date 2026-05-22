@@ -115,18 +115,39 @@ Now that agent-browser is confirmed available, use it for ALL browser operations
 
 ```
 1. OPEN       → agent-browser open <url>
-2. SNAPSHOT   → agent-browser snapshot
+2. SNAPSHOT   → agent-browser snapshot          ← ALWAYS first
 3. ACT        → agent-browser click / fill / type / scroll
-4. VERIFY     → agent-browser screenshot
+4. FALLBACK   → agent-browser screenshot        ← ONLY when snapshot is insufficient
 ```
 
-### Example: Navigate and Screenshot
+### Snapshot-First Rule
+
+**ALWAYS use `snapshot` before `screenshot`.** Snapshot provides structured interactive element references (`@eN`) and is vastly more token-efficient. Screenshot is a visual-only fallback.
+
+**When to use snapshot (default):**
+- Finding clickable elements, buttons, links, inputs
+- Understanding page structure and navigation
+- Filling forms, clicking, typing
+- Any task where you need to interact with the page
+
+**When to use screenshot (fallback only):**
+- Snapshot returns empty or incomplete (e.g., canvas-based UI, heavy JS frameworks)
+- Visual layout validation is required (e.g., "does this look correct?")
+- The task explicitly asks for a visual comparison or design check
+- After trying snapshot twice and it cannot provide actionable element refs
+
+**NEVER skip snapshot and go straight to screenshot.** Always attempt snapshot first, document why it failed, then fallback to screenshot.
+
+### Example: Navigate and Inspect
 
 ```bash
 # 1. Navigate
 agent-browser open "https://www.baidu.com"
 
-# 2. Take screenshot
+# 2. ALWAYS snapshot first
+agent-browser snapshot
+
+# 3. Only screenshot if snapshot cannot provide what you need
 agent-browser screenshot /tmp/baidu.png
 ```
 
@@ -313,8 +334,9 @@ agent-browser close
 | `agent-browser: command not found` | Run install.js or `npm install -g agent-browser` |
 | Chrome not found | Run `agent-browser install` to download Chrome |
 | ETIMEDOUT on `open` | Network restricted → Go to Step 4, use AskUserQuestion to let user choose |
-| Snapshot returns empty | Page still loading. Use `agent-browser wait` before snapshot |
+| Snapshot returns empty | Page still loading. Use `agent-browser wait` before snapshot. If still empty after waiting, page may use canvas/heavy JS → fallback to `screenshot` |
 | Click fails | Re-run `snapshot` after page changes. `@eN` refs may have shifted |
+| Snapshot vs screenshot | **Default to snapshot.** Only use screenshot when: (1) snapshot is empty after retry, (2) visual layout check required, (3) explicit user request for visual comparison |
 | Windows PowerShell errors | Use Git Bash, CMD, or WSL2 |
 | Element not found | Always use `snapshot` first to get current `@eN` refs |
 
