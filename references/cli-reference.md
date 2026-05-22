@@ -145,7 +145,10 @@ agent-browser get styles @e1             # 计算样式
 
 ## 截图
 
+截图永远不是第一步。必须先执行 `agent-browser snapshot -i`，只有在已经拿到 snapshot 或 snapshot 无法支撑视觉判断时才截图。
+
 ```bash
+agent-browser snapshot -i                       # 必须先做
 agent-browser screenshot                        # 临时路径
 agent-browser screenshot page.png               # 指定路径
 agent-browser screenshot --full full.png        # 全页截图
